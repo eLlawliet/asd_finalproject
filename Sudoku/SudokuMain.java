@@ -4,7 +4,7 @@ import javax.swing.*;
 /**
  * The main Sudoku program
  */
-public class Main extends JFrame {
+public class SudokuMain extends JFrame {
    private static final long serialVersionUID = 1L;  // to prevent serial warning
 
    // private variables
@@ -12,7 +12,7 @@ public class Main extends JFrame {
    JButton btnNewGame = new JButton("New Game");
 
    // Constructor
-   public Main() {
+   public SudokuMain() {
       Container cp = getContentPane();
       cp.setLayout(new BorderLayout());
 
@@ -34,6 +34,11 @@ public class Main extends JFrame {
    public static void main(String[] args) {
       // [TODO 1] Check "Swing program template" on how to run
       //  the constructor of "SudokuMain"
-      // .........
+      SwingUtilities.invokeLater(new Runnable() {
+         @Override
+         public void run() {
+             new SudokuMain(); // Create an instance of SudokuMain to display the GUI
+         }
+     });
    }
 }

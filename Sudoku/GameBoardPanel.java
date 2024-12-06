@@ -31,12 +31,16 @@ public class GameBoardPanel extends JPanel {
       }
 
       // [TODO 3] Allocate a common listener as the ActionEvent listener for all the
-      //  Cells (JTextFields)
-      // .........
+      CellInputListener listener = new CellInputListener();
 
       // [TODO 4] Adds this common listener to all editable cells
-      // .........
-
+      for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {  // Use the constant for row iteration
+         for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {  // Use the constant for column iteration
+             if (cells[row][col].isEditable()) {  // Check if the cell is editable
+                 cells[row][col].addActionListener(listener);   // Add the action listener to the editable cell
+             }
+         }
+     }
       super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
    }
 
@@ -72,5 +76,39 @@ public class GameBoardPanel extends JPanel {
    }
 
    // [TODO 2] Define a Listener Inner Class for all the editable Cells
-   // .........
+   private class CellInputListener implements ActionListener {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+         // Get a reference of the JTextField that triggers this action event
+         Cell sourceCell = (Cell)e.getSource();
+		 
+         // Retrieve the int entered
+         int numberIn = Integer.parseInt(sourceCell.getText());
+         // For debugging
+         System.out.println("You entered " + numberIn);
+
+         /*
+          * [TODO 5] (later - after TODO 3 and 4)
+          * Check the numberIn against sourceCell.number.
+          * Update the cell status sourceCell.status,
+          * and re-paint the cell via sourceCell.paint().
+          */
+          if (checkAnswer(sourceCell.row, sourceCell.col, numberIn)) {
+            sourceCell.status = CellStatus.CORRECT_GUESS;
+        } else {
+            sourceCell.status = CellStatus.WRONG_GUESS;
+        }
+
+        sourceCell.paint(); // Perbarui tampilan status sel
+
+         /*
+          * [TODO 6] (later)
+          * Check if the player has solved the puzzle after this move,
+          *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
+          */
+          if (isSolved()) {
+            JOptionPane.showMessageDialog(null, "Congratulations! You have solved the puzzle!", "Puzzle Solved", JOptionPane.INFORMATION_MESSAGE);
+        }
+      }
+   }
 }
