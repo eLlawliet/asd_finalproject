@@ -75,6 +75,10 @@ public class GameBoardPanel extends JPanel {
       return true;
    }
 
+   public boolean checkAnswer(int row, int col, int numberIn) {
+      return cells[row][col].number == numberIn; // Pastikan sel sesuai dengan angka yang benar
+  }
+
    // [TODO 2] Define a Listener Inner Class for all the editable Cells
    private class CellInputListener implements ActionListener {
       @Override
@@ -106,6 +110,7 @@ public class GameBoardPanel extends JPanel {
           * Check if the player has solved the puzzle after this move,
           *   by calling isSolved(). Put up a congratulation JOptionPane, if so.
           */
+
           if (isSolved()) {
             JOptionPane.showMessageDialog(null, "Congratulations! You have solved the puzzle!", "Puzzle Solved", JOptionPane.INFORMATION_MESSAGE);
         }
