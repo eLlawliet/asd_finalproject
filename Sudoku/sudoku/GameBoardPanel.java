@@ -47,9 +47,9 @@ public class GameBoardPanel extends JPanel {
          for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {  // Use the constant for column iteration
              if (cells[row][col].isEditable()) {  // Check if the cell is editable
                  cells[row][col].addActionListener(listener);   // Add the action listener to the editable cell
-             }
+            }
          }
-     }
+      }
       super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
    }
 
