@@ -1,3 +1,13 @@
+/**
+ * ES234317-Algorithm and Data Structures
+ * Semester Ganjil, 2024/2025
+ * Group Capstone Project
+ * Group #9
+ * 1 - 5026231010 - Daniel Setiawan Yulius Putra
+ * 2 - 5026231160 - Muhammad Gandhi Taqi Utomo
+ * 3 - 5026231184 - Dzaky Ahmad
+ */
+
 import java.io.IOException;
 import java.io.InputStream;
 import javax.sound.sampled.AudioInputStream;
