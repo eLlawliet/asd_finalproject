@@ -17,11 +17,16 @@ public class GameMain extends JPanel {
     public static final Color COLOR_NOUGHT = new Color(64, 154, 225); // Blue #409AE1
     public static final Font FONT_STATUS = new Font("OCR A Extended", Font.PLAIN, 14);
 
+    public static final int ROWS = 0;
+
+    public static final int COLS = 0;
+
     // Define game objects
     private Board board; // the game board
     private State currentState; // the current state of the game
     private Seed currentPlayer; // the current player
     private JLabel statusBar; // for displaying status message
+    private SoundManager soundManager;
 
     /** Constructor to setup the UI and game components */
     public GameMain() {
@@ -75,6 +80,8 @@ public class GameMain extends JPanel {
     /** Initialize the game (run once) */
     public void initGame() {
         board = new Board(); // allocate the game-board
+        soundManager = new SoundManager();
+        soundManager.playBackgroundMusic("Background.wav");
     }
 
     /** Reset the game-board contents and the current-state, ready for new game */
