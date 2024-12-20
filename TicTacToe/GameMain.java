@@ -50,6 +50,8 @@ public class GameMain extends JPanel {
                         currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
                     }
                 } else { // game over
+                    soundManager.stopBackgroundMusic();
+                    soundManager.playBackgroundMusic("Bg.wav");
                     newGame(); // restart the game
                 }
                 // Refresh the drawing canvas
@@ -81,7 +83,7 @@ public class GameMain extends JPanel {
     public void initGame() {
         board = new Board(); // allocate the game-board
         soundManager = new SoundManager();
-        soundManager.playBackgroundMusic("Background.wav");
+        soundManager.playBackgroundMusic("Bg.wav");
     }
 
     /** Reset the game-board contents and the current-state, ready for new game */
@@ -110,12 +112,18 @@ public class GameMain extends JPanel {
         } else if (currentState == State.DRAW) {
             statusBar.setForeground(Color.RED);
             statusBar.setText("It's a Draw! Click to play again.");
+            soundManager.stopBackgroundMusic();
+            soundManager.playBackgroundMusic("Draw.wav");
         } else if (currentState == State.CROSS_WON) {
             statusBar.setForeground(Color.RED);
             statusBar.setText("'X' Won! Click to play again.");
+            soundManager.stopBackgroundMusic();
+            soundManager.playBackgroundMusic("WIN.wav");
         } else if (currentState == State.NOUGHT_WON) {
             statusBar.setForeground(Color.RED);
             statusBar.setText("'O' Won! Click to play again.");
+            soundManager.stopBackgroundMusic();
+            soundManager.playBackgroundMusic("WIN.wav");
         }
     }
 
