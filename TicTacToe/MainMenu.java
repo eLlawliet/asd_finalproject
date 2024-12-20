@@ -44,6 +44,7 @@ public class MainMenu extends JPanel {
         otherGamesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Fixing This
                 // Handle Other Games button click
                 System.out.println("Other Games button clicked");
                 // Switch to Connect Four game
