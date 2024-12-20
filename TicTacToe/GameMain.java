@@ -118,7 +118,7 @@ public class GameMain extends JPanel {
             statusBar.setForeground(Color.RED);
             statusBar.setText("'X' Won! Click to play again.");
             soundManager.stopBackgroundMusic();
-            soundManager.playBackgroundMusic("WIN.wav");
+            soundManager.playBackgroundMusic("xwin.wav");
         } else if (currentState == State.NOUGHT_WON) {
             statusBar.setForeground(Color.RED);
             statusBar.setText("'O' Won! Click to play again.");
