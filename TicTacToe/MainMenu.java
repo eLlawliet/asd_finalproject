@@ -46,9 +46,13 @@ public class MainMenu extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Handle Other Games button click
                 System.out.println("Other Games button clicked");
-                // Add your code here to handle the action
+                // Switch to Connect Four game
+                frame.setContentPane(new C4GameMain()); // Ensure C4GameMain is implemented
+                frame.setSize(C4Board.CANVAS_WIDTH + 20, C4Board.CANVAS_HEIGHT + 80); // Adjust size for Connect Four
+                frame.revalidate();
             }
         });
+        
 
         // Add buttons to the panel
         add(vsHumanButton);
