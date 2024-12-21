@@ -59,14 +59,31 @@ public class GameBoardPanel extends JPanel {
     */
     public void newGame() {
          // Ask the player how many cells they want to guess
-   String input = JOptionPane.showInputDialog(this, "Enter the number of cells to guess:", "New Game", JOptionPane.QUESTION_MESSAGE);
-   
-   int numCellsToGuess;
-   try {
-      numCellsToGuess = Integer.parseInt(input);
-   } catch (NumberFormatException e) {
-      // If the input is not a valid number, default to 40
-      numCellsToGuess = 5;
+         int numCellsToGuess = 0;
+   boolean validInput = false;
+
+   while (!validInput) {
+      // Ask the player how many cells they want to guess
+      String input = JOptionPane.showInputDialog(this, "Enter the number of cells to guess (max 81):", "New Game", JOptionPane.QUESTION_MESSAGE);
+      
+      if (input == null) {
+         // If the user cancels the input dialog, exit the method
+         System.exit(0);
+         return;
+      }
+      
+      try {
+         numCellsToGuess = Integer.parseInt(input);
+         if (numCellsToGuess > 81) {
+            JOptionPane.showMessageDialog(this, "The maximum number of cells to guess is 81. Please enter a valid number.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+         } else if (numCellsToGuess < 1) {
+            JOptionPane.showMessageDialog(this, "The minimum number of cells to guess is 1. Please enter a valid number.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+         } else {
+            validInput = true; // Valid input
+         }
+      } catch (NumberFormatException e) {
+         JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+      }
    }
 
    puzzle.newPuzzle(numCellsToGuess);
