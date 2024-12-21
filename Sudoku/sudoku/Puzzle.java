@@ -1,12 +1,3 @@
-/**
- * ES234317-Algorithm and Data Structures
- * Semester Ganjil, 2024/2025
- * Group Capstone Project
- * Group #9
- * 1 - 5026231010 - Daniel Setiawan Yulius Putra
- * 2 - 5026231160 - Muhammad Gandhi Taqi Utomo
- * 3 - 5026231184 - Dzaky Ahmad
- */
 package sudoku;
 import java.util.*;
 /**
@@ -31,32 +22,30 @@ public class Puzzle {
       // Step 2: Randomly remove cells based on the difficulty level
       Random random = new Random();
 
-      // Jumlah false yang diinginkan
-
-      // Hitung total elemen dalam array
+      // Calculate total cells
       int totalCells = isGiven.length * isGiven[0].length;
 
-      // Pastikan jumlah false tidak melebihi jumlah total sel
+      // Make sure the number of cells to guess does not exceed the total cells
       if (cellsToGuess > totalCells) {
-         System.out.println("Jumlah false melebihi jumlah total sel!");
+         System.out.println("Number of cells to guess exceeds the total number of cells!");
          return;
       }
 
-      // Mengisi array dengan true
+      // Fill the array with true values
       for (int row = 0; row < isGiven.length; row++) {
          for (int col = 0; col < isGiven[0].length; col++) {
-              isGiven[row][col] = true; // Isi semua dengan true terlebih dahulu
+              isGiven[row][col] = true; // Set all cells as given initially
          }
       }
 
-      // Mengisi sejumlah 'false' sesuai dengan input
+      // Set the specified number of cells to guess (empty)
       int falseCount = 0;
       while (falseCount < cellsToGuess) {
          int row = random.nextInt(isGiven.length);
          int col = random.nextInt(isGiven[0].length);
          
-          // Hanya ganti menjadi false jika elemen tersebut belum false
-         if (isGiven[row][col] == true) {
+          // Change to false if the cell is currently true
+         if (isGiven[row][col]) {
             isGiven[row][col] = false;
             falseCount++;
          }
@@ -64,15 +53,15 @@ public class Puzzle {
    }
 
    private void generateSolvedBoard() {
-      // Inisialisasi board kosong
+      // Initialize empty board
       for (int row = 0; row < SudokuConstants.GRID_SIZE; row++) {
          for (int col = 0; col < SudokuConstants.GRID_SIZE; col++) {
             numbers[row][col] = 0;
-            isGiven[row][col] = true; // Semua sel diisi awalnya
+            isGiven[row][col] = true; // All cells are initially given
          }
       }
       
-      // Gunakan algoritma Backtracking untuk mengisi board
+      // Use Backtracking algorithm to fill the board
       solve(0, 0);
    }
 
@@ -102,18 +91,19 @@ public class Puzzle {
       }
       return false;
    }
+
    private boolean isValid(int num, int row, int col) {
-      // Cek baris
+      // Check row
       for (int i = 0; i < SudokuConstants.GRID_SIZE; i++) {
          if (numbers[row][i] == num) return false;
       }
       
-      // Cek kolom
+      // Check column
       for (int i = 0; i < SudokuConstants.GRID_SIZE; i++) {
          if (numbers[i][col] == num) return false;
       }
 
-      // Cek kotak 3x3
+      // Check 3x3 box
       int boxRow = (row / 3) * 3;
       int boxCol = (col / 3) * 3;
       for (int r = 0; r < 3; r++) {
