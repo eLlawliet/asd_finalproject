@@ -58,8 +58,18 @@ public class GameBoardPanel extends JPanel {
     * You can call this method to start a new game.
     */
     public void newGame() {
-      // Generate a new puzzle with more blank cells, e.g., 40 blank cells
-      puzzle.newPuzzle(40);
+         // Ask the player how many cells they want to guess
+   String input = JOptionPane.showInputDialog(this, "Enter the number of cells to guess:", "New Game", JOptionPane.QUESTION_MESSAGE);
+   
+   int numCellsToGuess;
+   try {
+      numCellsToGuess = Integer.parseInt(input);
+   } catch (NumberFormatException e) {
+      // If the input is not a valid number, default to 40
+      numCellsToGuess = 5;
+   }
+
+   puzzle.newPuzzle(numCellsToGuess);
    
       // Initialize all the 9x9 cells based on the puzzle
       for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
