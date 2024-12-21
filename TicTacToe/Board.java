@@ -1,8 +1,13 @@
-import java.awt.*;
-
 /**
- * The Board class models the ROWS-by-COLS game board.
+ * ES234317-Algorithm and Data Structures
+ * Semester Ganjil, 2024/2025
+ * Group Capstone Project
+ * Group #9
+ * 1 - 5026231010 - Daniel Setiawan Yulius Putra
+ * 2 - 5026231160 - Muhammad Gandhi Taqi Utomo
+ * 3 - 5026231184 - Dzaky Ahmad
  */
+import java.awt.*;
 public class Board {
    // Define named constants
    public static final int ROWS = 3; // ROWS x COLS cells

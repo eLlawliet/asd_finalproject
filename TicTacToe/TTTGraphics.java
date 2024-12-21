@@ -1,10 +1,15 @@
+/**
+ * ES234317-Algorithm and Data Structures
+ * Semester Ganjil, 2024/2025
+ * Group Capstone Project
+ * Group #9
+ * 1 - 5026231010 - Daniel Setiawan Yulius Putra
+ * 2 - 5026231160 - Muhammad Gandhi Taqi Utomo
+ * 3 - 5026231184 - Dzaky Ahmad
+ */
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-/**
- * Tic-Tac-Toe: Two-player Graphics version with Simple-OO in one class
- */
 public class TTTGraphics extends JFrame {
     private static final long serialVersionUID = 1L; // to prevent serializable warning
 

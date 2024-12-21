@@ -1,11 +1,15 @@
+/**
+ * ES234317-Algorithm and Data Structures
+ * Semester Ganjil, 2024/2025
+ * Group Capstone Project
+ * Group #9
+ * 1 - 5026231010 - Daniel Setiawan Yulius Putra
+ * 2 - 5026231160 - Muhammad Gandhi Taqi Utomo
+ * 3 - 5026231184 - Dzaky Ahmad
+ */
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-/**
- * Tic-Tac-Toe: Two-player Graphic version with better OO design.
- * The Board and Cell classes are separated in their own classes.
- */
 public class GameMain extends JPanel {
     private static final long serialVersionUID = 1L; // to prevent serializable warning
 
@@ -129,12 +133,12 @@ public class GameMain extends JPanel {
             statusBar.setForeground(Color.RED);
             statusBar.setText("'X' Won! Click to play again.");
             soundManager.stopBackgroundMusic();
-            soundManager.playBackgroundMusic("audio/xwin.wav");
+            soundManager.playBackgroundMusic("audio/WIN.wav");
         } else if (currentState == State.NOUGHT_WON) {
             statusBar.setForeground(Color.RED);
             statusBar.setText("'O' Won! Click to play again.");
             soundManager.stopBackgroundMusic();
-            soundManager.playBackgroundMusic("audio/WIN.wav");
+            soundManager.playBackgroundMusic("audio/xwin.wav");
         }
     }
 
