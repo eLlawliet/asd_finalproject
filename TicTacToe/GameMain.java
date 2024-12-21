@@ -17,10 +17,6 @@ public class GameMain extends JPanel {
     public static final Color COLOR_NOUGHT = new Color(64, 154, 225); // Blue #409AE1
     public static final Font FONT_STATUS = new Font("OCR A Extended", Font.PLAIN, 14);
 
-    public static final int ROWS = 0;
-
-    public static final int COLS = 0;
-
     // Define game objects
     private Board board; // the game board
     private State currentState; // the current state of the game
@@ -28,34 +24,54 @@ public class GameMain extends JPanel {
     private JLabel statusBar; // for displaying status message
     private SoundManager soundManager;
 
-    /** Constructor to setup the UI and game components */
+    private boolean vsAI; // Flag to determine if AI is enabled
+    private AIPlayer aiPlayer; // AI player instance
+
+    /** Default constructor for human vs. human mode */
     public GameMain() {
+        this(false); // Default to human vs. human mode
+    }
+
+    /** Constructor to specify game mode */
+    public GameMain(boolean vsAI) {
+        this.vsAI = vsAI;
+        initGame();
+        newGame();
+
+        if (vsAI) {
+            aiPlayer = new AIPlayerMinimax(board); // Use Minimax AI
+            aiPlayer.setSeed(Seed.NOUGHT); // AI plays as NOUGHT
+        }
 
         // This JPanel fires MouseEvent
         super.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) { // mouse-clicked handler
+            public void mouseClicked(MouseEvent e) {
                 int mouseX = e.getX();
                 int mouseY = e.getY();
-                // Get the row and column clicked
                 int row = mouseY / Cell.SIZE;
                 int col = mouseX / Cell.SIZE;
 
                 if (currentState == State.PLAYING) {
                     if (row >= 0 && row < Board.ROWS && col >= 0 && col < Board.COLS
                             && board.cells[row][col].content == Seed.NO_SEED) {
-                        // Update cells[][] and return the new game state after the move
                         currentState = board.stepGame(currentPlayer, row, col);
-                        // Switch player
                         currentPlayer = (currentPlayer == Seed.CROSS) ? Seed.NOUGHT : Seed.CROSS;
+                        repaint();
+
+                        // If playing against AI and game is still ongoing
+                        if (vsAI && currentState == State.PLAYING && currentPlayer == Seed.NOUGHT) {
+                            int[] move = aiPlayer.move();
+                            currentState = board.stepGame(Seed.NOUGHT, move[0], move[1]);
+                            currentPlayer = Seed.CROSS;
+                            repaint();
+                        }
                     }
                 } else { // game over
                     soundManager.stopBackgroundMusic();
                     soundManager.playBackgroundMusic("audio/Bg.wav");
-                    newGame(); // restart the game
+                    newGame();
                 }
-                // Refresh the drawing canvas
-                repaint(); // Callback paintComponent().
             }
         });
 
@@ -70,13 +86,8 @@ public class GameMain extends JPanel {
 
         super.setLayout(new BorderLayout());
         super.add(statusBar, BorderLayout.PAGE_END); // same as SOUTH
-        super.setPreferredSize(new Dimension(Board.CANVAS_WIDTH, Board.CANVAS_HEIGHT + 30));
-        // account for statusBar in height
+        super.setPreferredSize(new Dimension(Board.CANVAS_WIDTH, Board.CANVAS_HEIGHT + 30)); // account for statusBar in height
         super.setBorder(BorderFactory.createLineBorder(COLOR_BG_STATUS, 2, false));
-
-        // Set up Game
-        initGame();
-        newGame();
     }
 
     /** Initialize the game (run once) */
@@ -133,7 +144,7 @@ public class GameMain extends JPanel {
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new JFrame(TITLE);
-                // Set the content-pane of the JFrame to an instance of main JPanel
+                // Set the content-pane of the JFrame to an instance of MainMenu
                 frame.setContentPane(new MainMenu(frame));
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();

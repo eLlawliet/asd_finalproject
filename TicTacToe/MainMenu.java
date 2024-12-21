@@ -34,17 +34,17 @@ public class MainMenu extends JPanel {
 
         vsAIButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                // Handle VS AI button click
+                public void actionPerformed(ActionEvent e) {
                 System.out.println("VS AI button clicked");
-                // Add your code here to handle the action
-            }
+                frame.setContentPane(new GameMain(true)); // Pass true for AI mode
+                frame.setSize(Board.CANVAS_WIDTH + 15, Board.CANVAS_HEIGHT + 70);
+                frame.revalidate();
+    }
         });
 
         otherGamesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Fixing This
                 // Handle Other Games button click
                 System.out.println("Other Games button clicked");
                 // Switch to Connect Four game
