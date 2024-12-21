@@ -10,6 +10,9 @@
 package sudoku;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 /**
  * The main Sudoku program
  */
@@ -28,7 +31,16 @@ public class SudokuMain extends JFrame {
       cp.add(board, BorderLayout.CENTER);
 
       // Add a button to the south to re-start the game via board.newGame()
-      // ......
+      JPanel panel = new JPanel();
+      panel.add(btnNewGame);
+      cp.add(panel, BorderLayout.SOUTH);
+
+      btnNewGame.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            board.newGame();
+         }
+      });
 
       // Initialize the game board to start the game
       board.newGame();
